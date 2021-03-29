@@ -7,22 +7,71 @@
         <link rel="stylesheet" href="main.css"/>
         <!--Feel free to add more CSS files as needed-->
         <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+        <style type="text/css">
+            /* Custom style rules go here. We've included a few, but feel free to write your own! */
+            button:focus {
+                outline: 0 !important;
+            }
+            svg {
+                display: block;
+                margin: 0 auto;
+                font: 10px sans-serif;
+            }
+            .tooltip {
+                position: absolute;
+                font-size: 12px;
+                min-width: 100px;
+                padding: 10px;
+                width:  auto;
+                height: auto;
+            }
+        </style>
     </head>
-<body>
-    <div class="header">
-        <h3>Assignment 6 &laquo; Data Visualization Dashboard &raquo;</h3>
-    </div>
-    <!--  We included a basic HTML structure for the 3 graphs here. Feel free to change this if you'd like  -->
-    <div class="row">
-        <div class="col-lg-6">
-            <div id="graph1"></div>
-            <div id="graph2"></div><br/>
+    <body>
+        <div>
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="page-header center">
+                    <h1>Assignment 6 <small>&laquo; Data Visualization &raquo;</small></h1>
+                    <hr>
+                    <h3>Graph 1<div id="graph1"></div></h3>
+                    <hr>
+                    <h3>Graph 2<div id="graph2"></div></h3>
+                    <button type="button" class="btn btn-info" onclick="setData2('Global_Sales')">Global Sales</button>
+                    <button type="button" class="btn btn-info" onclick="setData2('NA_Sales')">North American Sales</button> 
+                    <button type="button" class="btn btn-info" onclick="setData2('EU_Sales')">EU Sales</button>
+                    <button type="button" class="btn btn-info" onclick="setData2('JP_Sales')">Japanese Sales</button> 
+                    <hr>
+                    <h3>Graph 3<div id="graph3"></div></h3>
+                    <button type="button" class="btn btn-info" onclick="setData3('Action')">Action</button>
+                    <button type="button" class="btn btn-info" onclick="setData3('Adventure')">Adventure</button> 
+                    <button type="button" class="btn btn-info" onclick="setData3('Fighting')">Fighting</button> 
+                    <button type="button" class="btn btn-info" onclick="setData3('Misc')">Misc</button>
+                    <button type="button" class="btn btn-info" onclick="setData3('Platform')">Platform</button> 
+                    <button type="button" class="btn btn-info" onclick="setData3('Puzzle')">Puzzle</button>
+                    <button type="button" class="btn btn-info" onclick="setData3('Racing')">Racing</button> 
+                    <button type="button" class="btn btn-info" onclick="setData3('Role-Playing')">Role-Playing</button>
+                    <button type="button" class="btn btn-info" onclick="setData3('Shooter')">Shooter</button>
+                    <button type="button" class="btn btn-info" onclick="setData3('Simulation')">Simulation</button> 
+                    <button type="button" class="btn btn-info" onclick="setData3('Sports')">Sports</button> 
+                    <button type="button" class="btn btn-info" onclick="setData3('Strategy')">Strategy</button> 
+                    <h3>Written Questions<div id="graph3"></div></h3>
+                        <text>
+                        1. My first graph answers the first question because it is a bar graph of the top 10 video game sales of all time. The reader can find the names of the top 10 games on the y-axis, and their sales on the x-axis. My second graph answers the second question because it is a pie chart of genre sales. By mousing over a piece of the pie, readers can view the name of the genre, its rank, and its sales. By using the buttons on the bottom, they can also view sales for different regions. My third graph answers the third question because it is a bar graph of the top 10 publishers for each genre. The names of the top 10 publishesr are on the y-axis, with the best publisher at the top. Using the buttons, the readers can explore top 10 data for different genres.</br> 
+                        2. First, D3 was helpful because it allowed me to add tooltips. This helped especially with the pie chart, where there wasn’t enough space on the pie to fit all of the information that I wanted. D3 was also helpful because I got to use buttons. I think that helps the page look a lot less cluttered than having all of the options on one page. Lastly, I think D3 is helpful because it is more adaptable to changes in the data than, say, matplotlib. Instead of generating a graph once and uploading a static photo of it, the graphs are generated in real time with D3. This meant that if I updated values in my source CSV, my page wouldn’t be outdated. Those are 3 reasons I thought D3 was helpful.</br>
+                        3. First, I think D3 is way too complicated for what most people need. A lot of the tasks, such as generating a bar graph or pie chart, would have been much quicker, easier, and bug-free with matplotlib, or even Excel. Second, I realized while working with D3 that it doesn’t necessarily “break” when there’s an error with the code: the page will just display a default value (e.g. if a color errors, it will just display black). I personally found this harder to debug than Python code, which will raise an error if there is something wrong. Lastly, D3 requires knowledge of not only the Javascript language but also HTML/CSS. Libraries like matplotlib allow users to produce visualizations indepedently of their knowledge of webdev.</br>
+                        4. While I think my graphs would be pretty accessible to general audiences, I can think of some demographics that would have a harder time. As mentioned in “Why Accessibility Is at the Heart of Data Visualization,” having alt-text woud be really helpful for the visually impaired. Moreover, the text on my graphs are pretty small, especially the labels of counts. People with visual impairments may have a harder time reading this information. Also, people who have less technical experience may not recognize the functionality of tooltips, especially if they are more used to pen-on-paper graphs. I could have written explicit instructions on how to use tooltips.</br>
+                        5. Continuing from my answer to number 4, I think alt-text is a really helpful feature that helps makes graphics more accessible. However, I wasn’t familiar with how to do that manually in HTML/CSS and was short on time completing the mandatory parts of the assignment. I could have also made the text bigger, especially with the pie chart, but I couldn’t think of another way to made sure that the text didn’t overlap with each other. If I had more time, I would have liked to figure out how to draw lines from the pie slices to the labels, so that I could give each label more room to have bigger fonts.</br>
+                        </text>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
         </div>
-        <div class="col-lg-6">
-            <div id="graph3"></div>
-        </div>
-    </div>
-    <!--Feel free to add more JavaScript files as needed-->
-    <script type="text/javascript" src="main.js"></script>
-</body>
-</html>
+        <script type="text/javascript">
+            const NUM_EXAMPLES = 10;
+            const NUM_EXAMPLES3 = 10;
+        </script>
+        <script type="text/javascript" src="main.js"></script>
+        </body>
+    </html>
+
